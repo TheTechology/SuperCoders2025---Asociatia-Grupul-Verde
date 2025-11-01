@@ -90,3 +90,67 @@ void loop() {
   digitalWrite(GREEN, HIGH);  delay(1500);
   digitalWrite(GREEN, LOW);   delay(400);
 }
+
+Demo #3 – Simulator web (fără placă Arduino)
+
+Salvează fișierul de mai jos ca web-demos/demo-simulator.html și deschide-l în browser.
+<!doctype html>
+<html lang="ro"><meta charset="utf-8">
+<title>SuperCoders • Simulator LED</title>
+<style>
+  body{font-family:system-ui,Arial;background:#0b0f2a;color:#eef;margin:0;display:grid;place-items:center;height:100vh}
+  .card{background:#12183f;border:1px solid #ffffff22;border-radius:16px;padding:20px;width:320px;text-align:center;box-shadow:0 6px 24px #0007}
+  .led{width:26px;height:26px;border-radius:50%;margin:10px auto;background:#2a2a2a;box-shadow:0 0 0 #0000;transition:.2s}
+  .led.on{background:#ff4d4d;box-shadow:0 0 16px #ff4d4d}
+  button{padding:10px 14px;border:0;border-radius:12px;font-weight:800;cursor:pointer;
+         background:linear-gradient(180deg,#6cf,#1487ff);color:#021b35}
+  p{color:#bcd}
+</style>
+<div class="card">
+  <h1>LED „Blink” – Simulator</h1>
+  <div id="dot" class="led"></div>
+  <p id="status">Oprit</p>
+  <button id="start">Pornește</button>
+</div>
+<script>
+  let on=false, timer=null;
+  const dot=document.getElementById('dot');
+  const status=document.getElementById('status');
+  const btn=document.getElementById('start');
+  btn.onclick=()=>{
+    if(timer){
+      clearInterval(timer); timer=null; on=false;
+      dot.classList.remove('on'); status.textContent='Oprit'; btn.textContent='Pornește'; return;
+    }
+    btn.textContent='Oprește';
+    timer=setInterval(()=>{
+      on=!on; dot.classList.toggle('on', on);
+      status.textContent = on ? 'Aprins' : 'Stins';
+    }, 500);
+  };
+</script>
+</html>
+🧩 Instalare și rulare (Arduino)
+
+Instalează aplicația Arduino IDE.
+
+Conectează placa (UNO / Nano / Mega) la portul USB.
+
+Deschide fișierul .ino din folderul proiectului.
+
+Selectează placa și portul (Tools → Board / Port).
+
+Apasă Upload pentru a încărca codul.
+
+supercoders-ed14/
+├─ README.md
+├─ arduino/
+│  ├─ Blink/
+│  │  └─ Blink.ino
+│  └─ Semafor/
+│     └─ Semafor.ino
+├─ web-demos/
+│  └─ demo-simulator.html
+└─ media/
+   └─ logo-grupul-verde.png   (opțional)
+
